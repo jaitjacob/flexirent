@@ -32,7 +32,6 @@ public class Main {
         //Few properties rented
         RentalRecord record1 = new RentalRecord("A_34nicholson",cust1,1,8,2018,2);
         System.out.println(record1.toString());
-        
 
 
 

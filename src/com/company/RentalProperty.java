@@ -14,14 +14,13 @@ public class RentalProperty {
     //-----------------------------------------------
 
 
-
-    RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName, int noOfBedrooms, String propertyType, String propertyStatus) {
+    //this constructor is for Apartment Type property listing
+    RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName, int noOfBedrooms, String propertyStatus) {
         this.propertyId = propertyId;
         this.streetNumber = streetNumber;
         this.streetName = streetName;
         this.suburbName = suburbName;
         this.noOfBedrooms = noOfBedrooms;
-        this.propertyType = propertyType;
         this.propertyStatus = propertyStatus;
         System.out.println("Property : " + propertyId + " added successfully");
     }
@@ -40,6 +39,19 @@ public class RentalProperty {
     }
     return null;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
