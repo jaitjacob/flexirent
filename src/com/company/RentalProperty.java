@@ -1,6 +1,6 @@
 package com.company;
 
-public class RentalProperty {
+public abstract class RentalProperty {
 
     public String propertyId;
     public String streetNumber;
@@ -12,42 +12,6 @@ public class RentalProperty {
     // also need to add 10 most recent rental records below - 10 object array
     RentalRecord[] ten_recent_rental_records = new RentalRecord[10];
     //-----------------------------------------------
-
-
-    //this constructor is for Apartment Type property listing
-    RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName, int noOfBedrooms, String propertyStatus) {
-        this.propertyId = propertyId;
-        this.streetNumber = streetNumber;
-        this.streetName = streetName;
-        this.suburbName = suburbName;
-        this.noOfBedrooms = noOfBedrooms;
-        this.propertyStatus = propertyStatus;
-        System.out.println("Property : " + propertyId + " added successfully");
-    }
-
-
-    public String isAvailable(){
-        if(this.propertyStatus.equals("A")){
-            return("Property available for renting.");
-        }
-        else if(this.propertyStatus.equals('R')){
-            return("Property currently occupied. Sorry");
-        }
-        else if(this.propertyStatus.equals('M')){
-            return("Property under maintenance, cannot be booked. Sorry");
-    }
-    return null;
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
