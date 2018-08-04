@@ -1,6 +1,6 @@
 package com.company;
 
-public class PremiumSuite {
+public abstract class PremiumSuite extends RentalProperty {
 
 
 

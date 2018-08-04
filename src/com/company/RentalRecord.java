@@ -1,6 +1,6 @@
 package com.company;
 
-public class RentalRecord {
+public class RentalRecord extends  FlexiRentSystem{
 
 
 
