@@ -26,7 +26,6 @@ public class RentalProperty {
     }
 
 
-
     public String isAvailable(){
         if(this.propertyStatus.equals("A")){
             return("Property available for renting.");
