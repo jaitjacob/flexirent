@@ -7,6 +7,8 @@ public class Apartment extends RentalProperty{
     final double THREE_BEDROOM_FEE = 319;
     final double LATE_FEE_PERCENT = 0.15;
 
+    Apartment(String propertyId, String streetNumber, String streetName, String su)
+
 
 
 

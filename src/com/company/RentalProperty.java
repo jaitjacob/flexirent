@@ -13,5 +13,12 @@ public abstract class RentalProperty extends  FlexiRentSystem {
     RentalRecord[] ten_recent_rental_records = new RentalRecord[10];
     //-----------------------------------------------
 
+    RentalProperty(String propertyId, String streetNumber, String streetName, String propertyStatus){
+        this.propertyId = propertyId;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
+        this.propertyStatus = propertyStatus;
+
+    }
 
 }

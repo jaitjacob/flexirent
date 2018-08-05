@@ -6,6 +6,7 @@ public class Main {
 
 
         FlexiRentSystem start = new FlexiRentSystem();
+        start.start();
 
     }
 }
