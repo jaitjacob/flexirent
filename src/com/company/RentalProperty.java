@@ -1,6 +1,6 @@
 package com.company;
 
-public class RentalProperty {
+public abstract class RentalProperty {
 
     String propertyId;
     String streetNumber;
@@ -9,11 +9,20 @@ public class RentalProperty {
     int noOfBedrooms;
     String propertyType;
     String propertyStatus;
-    RentalRecords recentRecords[10] = new RentalRecords[10];
+    RentalRecords[] recentRecords = new RentalRecords[10];
+
+    //constructor of this class to add property
+    RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName, String propertyStatus){
+        this.propertyId = propertyId;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
+        this.suburbName = suburbName;
+        this.propertyStatus = propertyStatus;
+
+    }
 
 
     //rent method adds the rental record after confirming that the property can be rented or no
-
 
     //return property
 
