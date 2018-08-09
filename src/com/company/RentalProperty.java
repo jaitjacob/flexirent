@@ -2,14 +2,18 @@ package com.company;
 
 public abstract class RentalProperty {
 
-    String propertyId;
-    String streetNumber;
-    String streetName;
-    String suburbName;
+
+    static int numberOfProperty =0;
+
+    private String propertyId;
+    private String streetNumber;
+    private String streetName;
+    private String suburbName;
     int noOfBedrooms;
     String propertyType;
-    String propertyStatus;
-    RentalRecords[] recentRecords = new RentalRecords[10];
+    private String propertyStatus;
+    double dailyRate;
+    private RentalRecords[] recentRecords = new RentalRecords[10];
 
     //constructor of this class to add property
     RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName, String propertyStatus){
@@ -21,15 +25,14 @@ public abstract class RentalProperty {
 
     }
 
+    //getters
+    public String getPropertyStatus() {
+        return propertyStatus;
+    }
 
-    //rent method adds the rental record after confirming that the property can be rented or no
 
-    //return property
-
-
-    //perform maintenance
-
-    //check renting conditions checks the day of the week and ensures whether the property can be rented or not
+    //The following methods can be called on any object of type Apartment or Premium Suite and each of the object have their own way of implementing it hence, adding them as abstract.
+    public abstract boolean rent(String customerId, DateTime rentDate, int numOfRentDay);
 
 
 
