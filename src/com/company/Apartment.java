@@ -5,7 +5,8 @@ public class Apartment extends RentalProperty {
 
 
     Apartment(String propertyId,String streetNumber, String streetName, String suburbName, String propertyStatus, int noOfBedrooms){
-        super(propertyId, streetNumber, streetName, suburbName, propertyStatus);
+        super(("A_"+propertyId), streetNumber, streetName, suburbName, propertyStatus);
+
         this.propertyType = "Apartment";
         this.noOfBedrooms = noOfBedrooms;
 
@@ -22,6 +23,16 @@ public class Apartment extends RentalProperty {
 
     public boolean rent(String customerId, DateTime rentDate, int numOfRentDay){
         //first lets check if the property is Available or not.
+        boolean returnValue = this.checkRentingconditions(rentDate,numOfRentDay);
+        if(returnValue == true){
+
+
+        }
+
+            return true;
+    }
+
+    public boolean checkRentingconditions(DateTime rentDate, int numOfRentDay){
         if(this.getPropertyStatus().toLowerCase().equals("rented")){
             return false;
         }
@@ -31,17 +42,17 @@ public class Apartment extends RentalProperty {
             //or a minimum of 3 days if the rental day is Friday or Saturday
             //and a maximum of 28 days
             Date day = new Date(rentDate.getTime());
-            String dayOfWeek = day.toString().split(" ")[0]);
+            String dayOfWeek = (day.toString().split(" ")[0]);
             if(dayOfWeek.toLowerCase().equals("sunday")||
                     dayOfWeek.toLowerCase().equals("monday")||
                     dayOfWeek.toLowerCase().equals("tuesday")||
                     dayOfWeek.toLowerCase().equals("wednesday")||
                     dayOfWeek.toLowerCase().equals("thursday")){
-                     if(numOfRentDay<2){
-                     return false;
-                    }
+                if(numOfRentDay<2){
+                    return false;
+                }
                 else if(dayOfWeek.toLowerCase().equals("saturday")
-                             ||dayOfWeek.toLowerCase().equals("friday")){
+                        ||dayOfWeek.toLowerCase().equals("friday")){
                     if(numOfRentDay<3){
                         return false;
                     }
@@ -53,12 +64,18 @@ public class Apartment extends RentalProperty {
         else {
             return false;
         }
-
     }
 
 
+
+
     public boolean returnProperty(DateTime actualReturnDate){
-        
+
+
+
+
+        return true;
+
     }
 
 

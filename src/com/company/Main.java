@@ -8,5 +8,10 @@ public class Main {
 
 
 
+
+        DateTime rentDay = new DateTime(1,2,2019);
+        DateTime returnDay = new DateTime(25,1,2019);
+        System.out.println(DateTime.diffDays(returnDay,rentDay));
+
     }
 }

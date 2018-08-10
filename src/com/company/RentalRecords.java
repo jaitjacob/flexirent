@@ -2,14 +2,28 @@ package com.company;
 
 public class RentalRecords {
 
-    String recordId;//propertyId_ + customerId_ + rentDate (8 digit format: ddmmyyyy)
-    DateTime rentDate;
-    DateTime estimatedReturnDate;
-    DateTime actualReturnDate = new DateTime(0,0,0); //a property yet to be rented and then returned is set to 0,0,0
+    private String recordId;//propertyId_ + customerId_ + rentDate (8 digit format: ddmmyyyy)
+    private DateTime rentDate;
+    private DateTime estimatedReturnDate;
+    private DateTime actualReturnDate = new DateTime(0,0,0); //a property yet to be rented and then returned is set to 0,0,0
     double rentalFee;
     double lateFee;
 
-    //constructor
+    //constructor called when the first rental record is inserted
+    RentalRecords(String propertyId, String customerId, DateTime rentDate, int numOfRentDay){
+        this.recordId = ""+propertyId +"_"+customerId+"_"+rentDate.getEightDigitDate();
+        this.rentDate = rentDate;
+        this.estimatedReturnDate = new DateTime(rentDate,numOfRentDay);
+    }
+
+
+    //when property returned
+    public boolean returnProperty(DateTime actualReturnDate){
+        this.actualReturnDate = actualReturnDate;
+
+        return true;
+
+    }
 
 
 
@@ -56,6 +70,21 @@ public class RentalRecords {
         }
     }
 
+
+
+
+    //insert a rental record
+    public boolean insertANewRecord(){
+
+        return true;
+
+
+    }
+
+
+
+    //calculate rental fee
+    //calculate late fee
 
 
 }

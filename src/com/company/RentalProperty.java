@@ -2,9 +2,6 @@ package com.company;
 
 public abstract class RentalProperty {
 
-
-    static int numberOfProperty =0;
-
     private String propertyId;
     private String streetNumber;
     private String streetName;
@@ -22,8 +19,9 @@ public abstract class RentalProperty {
         this.streetName = streetName;
         this.suburbName = suburbName;
         this.propertyStatus = propertyStatus;
-
     }
+
+
 
     //getters
     public String getPropertyStatus() {
@@ -33,6 +31,13 @@ public abstract class RentalProperty {
 
     //The following methods can be called on any object of type Apartment or Premium Suite and each of the object have their own way of implementing it hence, adding them as abstract.
     public abstract boolean rent(String customerId, DateTime rentDate, int numOfRentDay);
+
+    //The following method is called when a property is being returned.
+    public boolean returnProperty(DateTime returnDate){
+        
+        return true;
+
+    }
 
 
 
