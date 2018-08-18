@@ -22,22 +22,38 @@ public abstract class RentalProperty {
     }
 
 
-
     //getters
     public String getPropertyStatus() {
         return propertyStatus;
     }
 
 
+    //setters
+    public String setPropertyStatus(String propertyStatus){
+        this.propertyStatus = propertyStatus;
+    }
+
+
+    public abstract boolean checkRentingconditions(DateTime rentDate, int numOfRentDays);
     //The following methods can be called on any object of type Apartment or Premium Suite and each of the object have their own way of implementing it hence, adding them as abstract.
-    public abstract boolean rent(String customerId, DateTime rentDate, int numOfRentDay);
+
+    public boolean rent(String customerId, DateTime rentDate, int numOfRentDays){
+        //first lets check if the property is Available or not.
+        if(!checkRentingconditions(rentDate,numOfRentDays)){
+            System.err.println("Renting condition not satisfied. try again.");
+            return false;
+        }
+     }
 
     //The following method is called when a property is being returned.
     public boolean returnProperty(DateTime returnDate){
-        
         return true;
-
     }
+
+
+
+
+
 
 
 
