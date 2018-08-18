@@ -81,8 +81,6 @@ public class RentalRecords {
 
     }
 
-
-
     //calculate rental fee
     //calculate late fee
 

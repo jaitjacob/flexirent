@@ -4,11 +4,10 @@ import java.util.Date;
 public class Apartment extends RentalProperty {
 
 
-    Apartment(String propertyId,String streetNumber, String streetName, String suburbName, String propertyStatus, int noOfBedrooms){
-        super(("A_"+propertyId), streetNumber, streetName, suburbName, propertyStatus);
+    Apartment(String propertyId,String streetNumber, String streetName, String suburbName, int noOfBedrooms){
+        super(propertyId, streetNumber, streetName, suburbName);
         this.propertyType = "Apartment";
         this.noOfBedrooms = noOfBedrooms;
-        this.setPropertyStatus("Available");
 
         //assigning daily rate based on the number of Bedrooms
             if (noOfBedrooms == 3) {
