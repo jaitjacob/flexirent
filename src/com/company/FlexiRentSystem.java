@@ -85,7 +85,7 @@ public class FlexiRentSystem {
                              }
                              else {
                                  System.out.println("Enter customer ID: ");
-                                 String userId = userInput.nextLine();
+                                 String customerId = userInput.nextLine();
 
                                  System.out.println("Rent date (DD/MM/YYYY): ");
                                  String rentDate = userInput.nextLine();
@@ -94,6 +94,7 @@ public class FlexiRentSystem {
                                  System.out.println("How many days?: ");
                                  int noOfDays = userInput.nextInt();
 
+                                 allProperties[i].rent(customerId,rentDay,noOfDays);
 
                              }
                          }

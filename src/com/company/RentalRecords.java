@@ -17,6 +17,7 @@ public class RentalRecords {
     }
 
 
+
     //when property returned
     public boolean returnProperty(DateTime actualReturnDate){
         this.actualReturnDate = actualReturnDate;
