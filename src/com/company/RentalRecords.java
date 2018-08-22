@@ -17,6 +17,7 @@ public class RentalRecords {
     }
 
 
+
     //when property returned
     public boolean returnProperty(DateTime actualReturnDate){
         this.actualReturnDate = actualReturnDate;
@@ -80,8 +81,6 @@ public class RentalRecords {
 
 
     }
-
-
 
     //calculate rental fee
     //calculate late fee
