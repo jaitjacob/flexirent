@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Date;
 import java.util.Scanner;
 
 public class FlexiRentSystem {
@@ -95,15 +96,33 @@ public class FlexiRentSystem {
                                  int noOfDays = userInput.nextInt();
 
                                  allProperties[i].rent(customerId,rentDay,noOfDays);
-
                              }
                          }
                      }
 
                     break;
 
-
+                //Return property functionality
                  case 3:
+                     System.out.println("\nEnter the property ID of the property that has to be returned: ");
+                     //this property ID variable is being reused from case 2.
+                     propertyId = userInput.nextLine();
+
+                     if(!ifpropertyIdExist(propertyId)){
+                         System.err.println("The property ID does not seem to exist on the system.");
+                     }
+
+                     for(int i=0;i<countOfProperties;i++){
+                         if(allProperties[i].getPropertyId().equals(propertyId)){
+                             System.out.println("\nEnter the return date: ");
+                             String returnDate = userInput.nextLine();
+                             DateTime actualReturnDate = passtheDatefromString(returnDate);
+                             allProperties[i].returnProperty(actualReturnDate);
+
+                         }
+                     }
+
+
                     break;
 
 
@@ -149,6 +168,7 @@ public class FlexiRentSystem {
             }
             return false;
         }
+    return false;
     }
 
 

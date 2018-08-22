@@ -11,11 +11,11 @@ public class Apartment extends RentalProperty {
 
         //assigning daily rate based on the number of Bedrooms
             if (noOfBedrooms == 3) {
-                this.dailyRate = 319;
+                setDailyRate(319);
             } else if (noOfBedrooms == 2) {
-                this.dailyRate = 210;
+                setDailyRate(210);
             } else if (noOfBedrooms == 1) {
-                this.dailyRate = 143;
+                setDailyRate(143);
             }
         }
 
@@ -38,7 +38,6 @@ public class Apartment extends RentalProperty {
                     dayOfWeek.toLowerCase().equals("wednesday")||
                     dayOfWeek.toLowerCase().equals("thursday")){
                 if(numOfRentDays>2){
-                    this.setPropertyStatus("Rented");
                     return true;
                 }
                 else if(numOfRentDays<2){
@@ -47,7 +46,6 @@ public class Apartment extends RentalProperty {
                 else if(dayOfWeek.toLowerCase().equals("saturday")
                         ||dayOfWeek.toLowerCase().equals("friday")){
                     if(numOfRentDays>3){
-                        this.setPropertyStatus("Rented");
                         return true;
                     }
                     else if(numOfRentDays<3){
@@ -61,22 +59,5 @@ public class Apartment extends RentalProperty {
             return false;
         }
     }
-
-
-
-
-    public boolean returnProperty(DateTime actualReturnDate){
-
-
-
-
-
-        return true;
-
-    }
-
-
-
-
 
 }

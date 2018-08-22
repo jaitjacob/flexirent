@@ -7,7 +7,7 @@ public class PremiumSuite extends RentalProperty{
         super(propertyId, streetNumber, streetName, suburbName);
         this.propertyType = "Premium";
         this.noOfBedrooms = 3;
-        this.dailyRate = 554;
+        setDailyRate(554);
 
     }
 
