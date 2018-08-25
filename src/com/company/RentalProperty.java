@@ -47,11 +47,10 @@ public abstract class RentalProperty {
     }
 
     public String getPropertyDetails() {
-
         String returnString = "\n---------\nProperty ID:" + getPropertyId() + "\n" + "Street number: " + getStreetNumber() + "\n" + "Street name: " + getStreetName() + "\n" + "Suburb Name: " + getSuburbName() + "\n" + "Property status: " + getPropertyStatus() +"\n";
         returnString+="\nRental Records\n";
         if(noOfRentalRecords==0){
-            returnString+="**NO RENTAL RECORD PRESENT AT THE MOMENT**";
+            returnString+="**NO RENTAL RECORD YET**";
         }else if(noOfRentalRecords>0){
             for(int i=0;i<noOfRentalRecords;i++){
             returnString+=recentRecords[i].getDetails();
@@ -91,21 +90,21 @@ public abstract class RentalProperty {
     public boolean rent(String customerId, DateTime rentDate, int numOfRentDays) {
         //first lets check if the property is Available or not.
         if (!checkRentingconditions(rentDate, numOfRentDays)) {
-            System.err.println("Renting condition not satisfied. try again.");
+            System.err.print("Renting condition not satisfied. try again.");
             return false;
         }
 
         if(noOfRentalRecords == 0){
             recentRecords[0] = new RentalRecords(getPropertyId(),customerId,rentDate,numOfRentDays);
             noOfRentalRecords++;
-            System.err.println("Rental record generated.");
+            System.err.print("Rental record generated.");
             this.setPropertyStatus("Rented");
             return true;
         }
         else if(noOfRentalRecords>1 && noOfRentalRecords<=10){
             System.arraycopy(recentRecords,0,recentRecords,1, noOfRentalRecords);
             recentRecords[0] = new RentalRecords(getPropertyId(),customerId,rentDate,numOfRentDays);
-            System.err.println("Rental record generated.");
+            System.err.print("Rental record generated.");
             this.setPropertyStatus("Rented");
             if(noOfRentalRecords==10){
                 noOfRentalRecords = 0;
@@ -128,7 +127,7 @@ public abstract class RentalProperty {
           this.setPropertyStatus("available");
       }
       else if(!returnValue){
-          System.err.println("\nProperty could not be returned.");
+          System.err.print("Property could not be returned.");
       }
     }
 

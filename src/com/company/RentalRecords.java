@@ -23,19 +23,16 @@ public class RentalRecords {
         this.actualReturnDate = actualReturnDate;
 
         if (DateTime.diffDays(actualReturnDate, rentDate) < 0) {
-            System.err.println("Property cannot be returned prior to the rental date.");
+            System.err.print("Property cannot be returned prior to the rental date.");
             return false;
         }
 
         if (DateTime.diffDays(estimatedReturnDate, actualReturnDate) <= 0) {
-            //actual return was earlier than expected or on the estimated date.
-            //ONLY RENTAL fee to be calculated.
-
             //the following is just to understand what the program is interpreting. Could be removed if you want less verbose.
             if (DateTime.diffDays(estimatedReturnDate, actualReturnDate) < 0) {
-                System.err.println("\nActual return seems to be earlier than the promised return day.\n");
+                System.err.print("Actual return seems to be earlier than the promised return day.");
             } else if (DateTime.diffDays(estimatedReturnDate, actualReturnDate) == 0) {
-                System.err.println("\nActual return seems to be on the estimated day! Perfect.\n");
+                System.err.print("Actual return seems to be on the estimated day! Perfect.");
             }
 
 

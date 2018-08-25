@@ -11,7 +11,7 @@ public class FlexiRentSystem {
     void startFlexiRentSystem() {
         int userOption;
         Scanner userInput = new Scanner(System.in);
-        String menu = "**** FLEXIRENT SYSTEM MENU ****\n" +
+        String menu = "\n**** FLEXIRENT SYSTEM MENU ****\n" +
                 "\n1.Add Property\n" +
                 "2.Rent Property\n" +
                 "3.Return Property\n" +
@@ -23,31 +23,31 @@ public class FlexiRentSystem {
 
         do {
 
-            System.out.println(menu);
+            System.out.print(menu);
             userOption = userInput.nextInt();
             userInput.nextLine();
             switch (userOption) {
                  case 1://add property
-                    System.out.println("Enter type of property: ");
+                    System.out.print("Enter type of property: ");
                     String propertyType;
                     propertyType = userInput.nextLine();
                     if(propertyType.toLowerCase().equals("apartment")){
                         String streetNumber,streetName,suburbName,propertyId;
                         int noOfBedrooms;
-                        System.out.println("Enter street number: ");
+                        System.out.print("Enter street number: ");
                         streetNumber = userInput.nextLine();
-                        System.out.println("Enter street name: ");
+                        System.out.print("Enter street name: ");
                         streetName = userInput.nextLine();
-                        System.out.println("Enter suburb name: ");
+                        System.out.print("Enter suburb name: ");
                         suburbName = userInput.nextLine();
-                        System.out.println("Enter number of Bedrooms: "); noOfBedrooms = userInput.nextInt();
+                        System.out.print("Enter number of Bedrooms: "); noOfBedrooms = userInput.nextInt();
                         propertyId = propertyIdGenerator(propertyType);
 
                         if(!checkIfPropertyAlreadyExists(streetNumber,streetName,suburbName)){
                             allProperties[countOfProperties++] = new Apartment(propertyId,streetNumber,streetName,suburbName,noOfBedrooms);
                         }
                         else{
-                            System.err.println("Similar property already in system. Cannot add. Sorry");
+                            System.err.print("Similar property already in system. Cannot add. Sorry");
                             break;
                         }
                     }
@@ -66,14 +66,16 @@ public class FlexiRentSystem {
                         }
                     }
 
+
                     break;
+                //end of Case 1
 
                 //rent property
                  case 2:
-                     System.out.println("Enter property ID: ");
+                     System.out.print("Enter property ID: ");
                      String propertyId = userInput.nextLine();
                      if(!ifpropertyIdExist(propertyId)){
-                         System.err.println("\nProperty ID does not seem to exist on the system.");
+                         System.err.print("\nProperty ID does not seem to exist on the system.");
                          break;
                      }
 
@@ -81,18 +83,18 @@ public class FlexiRentSystem {
                          if(allProperties[i].getPropertyId().equals(propertyId)){
                              if(!allProperties[i].isAvailable()){
                                  //this means the property is not available - either rented or under maintenance.
-                                 System.err.println("Property not available for renting. Sorry.");
+                                 System.err.print("Property not available for renting. Sorry.");
                                  break;
                              }
                              else {
-                                 System.out.println("Enter customer ID: ");
+                                 System.out.print("Enter customer ID: ");
                                  String customerId = userInput.nextLine();
 
-                                 System.out.println("Rent date (DD/MM/YYYY): ");
+                                 System.out.print("Rent date (DD/MM/YYYY): ");
                                  String rentDate = userInput.nextLine();
                                  DateTime rentDay = passtheDatefromString(rentDate);
 
-                                 System.out.println("How many days?: ");
+                                 System.out.print("How many days?: ");
                                  int noOfDays = userInput.nextInt();
 
                                  allProperties[i].rent(customerId,rentDay,noOfDays);
@@ -104,12 +106,12 @@ public class FlexiRentSystem {
 
                 //Return property functionality
                  case 3:
-                     System.out.println("\nEnter the property ID of the property that has to be returned: ");
+                     System.out.print("Enter the property ID of the property that has to be returned: ");
                      //this property ID variable is being reused from case 2.
                      propertyId = userInput.nextLine();
 
                      if(!ifpropertyIdExist(propertyId)){
-                         System.err.println("The property ID does not seem to exist on the system.");
+                         System.err.print("The property ID does not seem to exist on the system.");
                      }
 
                      for(int i=0;i<countOfProperties;i++){
@@ -125,16 +127,37 @@ public class FlexiRentSystem {
 
                     break;
 
-
-
+                 //property maintenance
                  case 4:
+                     System.out.print("Please enter the property ID: ");
+                     propertyId = userInput.nextLine();
+
+                     if(!ifpropertyIdExist(propertyId)){
+                         System.err.print("Property ID does not seem to exist on the system.");
+                         break;
+                     }
+
+                     for(int i=0;i<countOfProperties;i++){
+                         if(allProperties[i].getPropertyId().equalsIgnoreCase(propertyId)){
+                             if(allProperties[i].getPropertyStatus().equalsIgnoreCase("available")){
+                                 allProperties[i].setPropertyStatus("Under Maintenance");
+                             }
+
+                             if(allProperties[i].getPropertyStatus().equalsIgnoreCase("rented")){
+                                 System.err.print("Can NOT perform maintenance when property being currently rented.");
+                             }
+
+                             if(allProperties[i].getPropertyStatus().equalsIgnoreCase("under maintenance")){
+                                 System.err.print("Already under maintenance. Calm down.");
+                             }
+                         }
+                     }
                     break;
-
-
 
 
                  case 5:
                     break;
+
                  case 6:
                      for(int i=0; i<countOfProperties;i++){
                          System.out.println(allProperties[i].getPropertyDetails());
