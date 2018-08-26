@@ -12,7 +12,7 @@ public class PremiumSuite extends RentalProperty{
     }
 
     @Override
-    public boolean checkRentingconditions(DateTime rentDate, int numOfRentDays) {
+    public boolean rentingconditions(DateTime rentDate, int numOfRentDays) {
         return false;
     }
 

@@ -40,7 +40,8 @@ public class FlexiRentSystem {
                         streetName = userInput.nextLine();
                         System.out.print("Enter suburb name: ");
                         suburbName = userInput.nextLine();
-                        System.out.print("Enter number of Bedrooms: "); noOfBedrooms = userInput.nextInt();
+                        System.out.print("Enter number of Bedrooms: ");
+                        noOfBedrooms = userInput.nextInt();
                         propertyId = propertyIdGenerator(propertyType);
 
                         if(!checkIfPropertyAlreadyExists(streetNumber,streetName,suburbName)){
@@ -120,7 +121,6 @@ public class FlexiRentSystem {
                              String returnDate = userInput.nextLine();
                              DateTime actualReturnDate = passtheDatefromString(returnDate);
                              allProperties[i].returnProperty(actualReturnDate);
-
                          }
                      }
 
@@ -156,7 +156,26 @@ public class FlexiRentSystem {
 
 
                  case 5:
-                    break;
+                     System.out.print("Please enter the property ID: ");
+                     propertyId = userInput.nextLine();
+
+                     if(!ifpropertyIdExist(propertyId)){
+                         System.err.print("Property ID does not seem to exist on the system.");
+                         break;
+                     }
+
+                     for(int i=0;i<countOfProperties;i++){
+                         if(allProperties[i].getPropertyId().equalsIgnoreCase(propertyId)){
+                             if(allProperties[i].getPropertyStatus().equalsIgnoreCase("Under Maintenance")){
+                                 allProperties[i].setPropertyStatus("Available");
+                             }
+                          else{
+                                 System.out.print("Property should be 'under maintenance' to be able to complete maintenance.");
+                             }
+                         }
+                     }
+
+                     break;
 
                  case 6:
                      for(int i=0; i<countOfProperties;i++){

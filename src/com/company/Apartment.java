@@ -19,7 +19,7 @@ public class Apartment extends RentalProperty {
     }
 
 
-    public boolean checkRentingconditions(DateTime rentDate, int numOfRentDays) {
+    public boolean rentingconditions(DateTime rentDate, int numOfRentDays) {
 
         if (this.getPropertyStatus().toLowerCase().equals("rented")) {
             return false;
