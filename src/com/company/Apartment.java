@@ -21,7 +21,7 @@ public class Apartment extends RentalProperty {
 
     public boolean rentingconditions(DateTime rentDate, int numOfRentDays) {
 
-        if (this.getPropertyStatus().toLowerCase().equals("rented")) {
+        if (this.getPropertyStatus().equalsIgnoreCase("rented")||this.getPropertyStatus().equalsIgnoreCase("under maintenance")) {
             return false;
         }
 
@@ -55,5 +55,19 @@ public class Apartment extends RentalProperty {
         //end of check renting condition
         return false;
 
+    }
+
+    @Override
+    public String getPropertyDetails() {
+        String returnString = "\n---------\nProperty ID:" + getPropertyId() + "\n" + "Street number: " + getStreetNumber() + "\n" + "Street name: " + getStreetName() + "\n" + "Suburb Name: " + getSuburbName() + "\n" + "Property status: " + getPropertyStatus() +"\n";
+        returnString+="\nRental Records\n";
+        if(noOfRentalRecords==0){
+            returnString+="**NO RENTAL RECORD YET**";
+        }else if(noOfRentalRecords>0){
+            for(int i=0;i<noOfRentalRecords;i++){
+                returnString+=recentRecords[i].getDetails();
+            }
+        }
+        return returnString;
     }
 }
