@@ -14,7 +14,7 @@ public abstract class RentalProperty {
 
 
     public static int noOfRentalRecords = 0;
-    private RentalRecords[] recentRecords = new RentalRecords[10];
+    public RentalRecords[] recentRecords = new RentalRecords[10];
 
     //constructor of this class to add property
     RentalProperty(String propertyId, String streetNumber, String streetName, String suburbName) {
@@ -47,18 +47,18 @@ public abstract class RentalProperty {
         return suburbName;
     }
 
-    public String getPropertyDetails() {
-        String returnString = "\n---------\nProperty ID:" + getPropertyId() + "\n" + "Street number: " + getStreetNumber() + "\n" + "Street name: " + getStreetName() + "\n" + "Suburb Name: " + getSuburbName() + "\n" + "Property status: " + getPropertyStatus() +"\n";
-        returnString+="\nRental Records\n";
-        if(noOfRentalRecords==0){
-            returnString+="**NO RENTAL RECORD YET**";
-        }else if(noOfRentalRecords>0){
-            for(int i=0;i<noOfRentalRecords;i++){
-            returnString+=recentRecords[i].getDetails();
-            }
-        }
-        return returnString;
-    }
+//    public String getPropertyDetails() {
+//        String returnString = "\n---------\nProperty ID:" + getPropertyId() + "\n" + "Street number: " + getStreetNumber() + "\n" + "Street name: " + getStreetName() + "\n" + "Suburb Name: " + getSuburbName() + "\n" + "Property status: " + getPropertyStatus() +"\n";
+//        returnString+="\nRental Records\n";
+//        if(noOfRentalRecords==0){
+//            returnString+="**NO RENTAL RECORD YET**";
+//        }else if(noOfRentalRecords>0){
+//            for(int i=0;i<noOfRentalRecords;i++){
+//            returnString+=recentRecords[i].getDetails();
+//            }
+//        }
+//        return returnString;
+//    }
 
     public double getDailyRate(){
         return dailyRate;
@@ -73,7 +73,7 @@ public abstract class RentalProperty {
 
 
     public boolean isAvailable() {
-        if (propertyStatus.toLowerCase().equals("available"))
+        if (propertyStatus.equalsIgnoreCase("available"))
             return true;
 
         return false;
@@ -83,7 +83,7 @@ public abstract class RentalProperty {
     //ABSTRACT METHODS THAT THE SUBCLASSES NEED TO IMPLEMENT NEED TO GO DOWN HERE. LOOK BELOW.
     //The following methods can be called on any object of type Apartment or Premium Suite and each of the object have their own way of implementing it hence, adding them as abstract.
     public abstract boolean rentingconditions(DateTime rentDate, int numOfRentDays);
-
+    public abstract String getPropertyDetails();
 
 
 

@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 public class FlexiRentSystem {
 
-    static int countOfProperties;
+    static int countOfProperties=0;
     RentalProperty[] allProperties = new RentalProperty[50];
+
 
     void startFlexiRentSystem() {
         int userOption;
@@ -31,7 +32,7 @@ public class FlexiRentSystem {
                     System.out.print("Enter type of property: ");
                     String propertyType;
                     propertyType = userInput.nextLine();
-                    if(propertyType.toLowerCase().equals("apartment")){
+                    if(propertyType.equalsIgnoreCase("apartment")||propertyType.equalsIgnoreCase("a")){
                         String streetNumber,streetName,suburbName,propertyId;
                         int noOfBedrooms;
                         System.out.print("Enter street number: ");
@@ -53,14 +54,17 @@ public class FlexiRentSystem {
                         }
                     }
 
-                    if(propertyType.toLowerCase().equals("premium suite")){
-                        String streetNumber,streetName,suburbName,propertyId;
-                        System.out.println("Enter street number: "); streetNumber = userInput.nextLine();
-                        System.out.println("Enter street name: "); streetName = userInput.nextLine();
-                        System.out.println("Enter suburb name: "); suburbName = userInput.nextLine();
+                    if(propertyType.equalsIgnoreCase("premium suite")||propertyType.equalsIgnoreCase("ps")||propertyType.equalsIgnoreCase("p")){
+                        String streetNumber,streetName,suburbName,propertyId,lastMaintenanceDateInString;
+                        DateTime lastMaintenanceDate;
+                        System.out.print("Enter street number: "); streetNumber = userInput.nextLine();
+                        System.out.print("Enter street name: "); streetName = userInput.nextLine();
+                        System.out.print("Enter suburb name: "); suburbName = userInput.nextLine();
+                        System.out.print("Enter the last date of maintenance: "); lastMaintenanceDateInString = userInput.nextLine();
+                        lastMaintenanceDate = passtheDatefromString(lastMaintenanceDateInString);
                         propertyId = propertyIdGenerator(propertyType);
                         if(!checkIfPropertyAlreadyExists(streetNumber,streetName,suburbName)) {
-                            allProperties[countOfProperties++] = new PremiumSuite(propertyId, streetNumber, streetName, suburbName);
+                            allProperties[countOfProperties++] = new PremiumSuite(propertyId, streetNumber, streetName, suburbName,lastMaintenanceDate);
                         }
                         else{
                             System.err.println("Similar property already in system. Cannot add. Sorry");
@@ -81,7 +85,7 @@ public class FlexiRentSystem {
                      }
 
                      for(int i=0;i<countOfProperties;i++){
-                         if(allProperties[i].getPropertyId().equals(propertyId)){
+                         if(allProperties[i].getPropertyId().equalsIgnoreCase(propertyId)){
                              if(!allProperties[i].isAvailable()){
                                  //this means the property is not available - either rented or under maintenance.
                                  System.err.print("Property not available for renting. Sorry.");
@@ -99,6 +103,8 @@ public class FlexiRentSystem {
                                  int noOfDays = userInput.nextInt();
 
                                  allProperties[i].rent(customerId,rentDay,noOfDays);
+                                 //the for loop need not check further if the property was found and rented. so added break below.
+                                 break;
                              }
                          }
                      }
@@ -215,7 +221,7 @@ public class FlexiRentSystem {
 
 
     public String propertyIdGenerator(String propertyType){
-        if(propertyType.toLowerCase().equals("apartment")){
+        if(propertyType.equalsIgnoreCase("apartment")||propertyType.equalsIgnoreCase("a")){
             return "A"+countOfProperties+"";
         }
         else{
