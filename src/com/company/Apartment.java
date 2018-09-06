@@ -4,79 +4,70 @@ import java.util.Date;
 public class Apartment extends RentalProperty {
 
 
-    Apartment(String propertyId,String streetNumber, String streetName, String suburbName, int noOfBedrooms){
+    Apartment(String propertyId, String streetNumber, String streetName, String suburbName, int noOfBedrooms) {
         super(propertyId, streetNumber, streetName, suburbName);
         this.propertyType = "Apartment";
         this.noOfBedrooms = noOfBedrooms;
-
         //assigning daily rate based on the number of Bedrooms
-            if (noOfBedrooms == 3) {
-                this.dailyRate = 319;
-            } else if (noOfBedrooms == 2) {
-                this.dailyRate = 210;
-            } else if (noOfBedrooms == 1) {
-                this.dailyRate = 143;
-            }
+        if (noOfBedrooms == 3) {
+            setDailyRate(319);
+        } else if (noOfBedrooms == 2) {
+            setDailyRate(210);
+        } else if (noOfBedrooms == 1) {
+            setDailyRate(143);
         }
+    }
 
 
-    public boolean checkRentingconditions(DateTime rentDate, int numOfRentDays){
-        if(this.getPropertyStatus().toLowerCase().equals("rented")){
+    public boolean rentingconditions(DateTime rentDate, int numOfRentDays) {
+
+        if (this.getPropertyStatus().equalsIgnoreCase("rented")||this.getPropertyStatus().equalsIgnoreCase("under maintenance")) {
             return false;
         }
-        else if(this.getPropertyStatus().toLowerCase().equals("available")){
+
+        if (this.getPropertyStatus().toLowerCase().equals("available")) {
             //if it is available then check if it booked in such a way that Each Apartment can be rented for:
             //a minimum of 2 days if the rental day is between Sunday and Thursday inclusively
             //or a minimum of 3 days if the rental day is Friday or Saturday
             //and a maximum of 28 days
             Date day = new Date(rentDate.getTime());
-            String dayOfWeek = (day.toString().split(" ")[0]);
+            String dayOfWeek = (day.toString().split(" ")[0]).toLowerCase();
 
-            if(dayOfWeek.toLowerCase().equals("sunday")||
-                    dayOfWeek.toLowerCase().equals("monday")||
-                    dayOfWeek.toLowerCase().equals("tuesday")||
-                    dayOfWeek.toLowerCase().equals("wednesday")||
-                    dayOfWeek.toLowerCase().equals("thursday")){
-                if(numOfRentDays>2){
-                    this.setPropertyStatus("Rented");
+            if (dayOfWeek.toLowerCase().equals("sun") || dayOfWeek.toLowerCase().equals("mon") || dayOfWeek.toLowerCase().equals("tue") || dayOfWeek.toLowerCase().equals("wed") || dayOfWeek.toLowerCase().equals("thu")) {
+                if (numOfRentDays > 2 && numOfRentDays <= 28) {
                     return true;
-                }
-                else if(numOfRentDays<2){
+                } else if (numOfRentDays < 2) {
+                    System.err.print("Can be rented only for minimum 2 days or greater.");
                     return false;
                 }
-                else if(dayOfWeek.toLowerCase().equals("saturday")
-                        ||dayOfWeek.toLowerCase().equals("friday")){
-                    if(numOfRentDays>3){
-                        this.setPropertyStatus("Rented");
-                        return true;
-                    }
-                    else if(numOfRentDays<3){
-                        return false;
-                    }
-                }
             }
-            return true;
+
+            if (dayOfWeek.toLowerCase().equals("sat") || dayOfWeek.toLowerCase().equals("fri")) {
+                if (numOfRentDays > 3 && numOfRentDays <= 28) {
+                    return true;
+                } else if (numOfRentDays < 3) {
+                    System.err.print("Can be rented only for minimum 3 days or greater.");
+                    return false;
+                }
+            }//if saturday or friday close
+
         }
-        else {
-            return false;
-        }
-    }
-
-
-
-
-    public boolean returnProperty(DateTime actualReturnDate){
-
-
-
-
-
-        return true;
+        //end of check renting condition
+        return false;
 
     }
 
-
-
-
-
+    @Override
+    public String getPropertyDetails() {
+        String returnString = "\n---------\nProperty ID:" + getPropertyId() + "\n" + "Street number: " + getStreetNumber() + "\n" + "Street name: " + getStreetName() + "\n" + "Suburb Name: " + getSuburbName() + "\n" + "Property status: " + getPropertyStatus() +"\n";
+        returnString+="\nRental Records\n";
+        if(noOfRentalRecords==0){
+            returnString+="**NO RENTAL RECORD YET**";
+        }else if(noOfRentalRecords>0){
+            for(int i=0;i<noOfRentalRecords;i++){
+                returnString+=recentRecords[i].getDetails();
+            }
+        }
+        return returnString;
+    }
 }
